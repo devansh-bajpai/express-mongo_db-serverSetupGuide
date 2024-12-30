@@ -1,9 +1,16 @@
+// Importing mongoose
 const mongoose = require('mongoose');
-// const mongooseURL = 'mongodb://127.0.0.1:27017/myFunDB';
-const mongooseURL = 'mongodb+srv://devanshbcode:devCodesEpic87@cluster0.4ws4d.mongodb.net/';
+// Configure dot env
+require('dotenv').config();
 
+// Setup a mongooseURL
+const mongooseURL = process.env.mongooseURL_local;
+// const mongooseURL = process.env.mongooseURL;
+
+// Connect to the URL
 mongoose.connect(mongooseURL);
 
+// Create database object: Responsible for basically everything
 const db = mongoose.connection;
 
 db.on('connected', () => {
@@ -19,4 +26,5 @@ db.on('error', (err) => {
 })
 
 
+// Export the database object
 module.exports = db;
